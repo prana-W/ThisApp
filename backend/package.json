@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "This is the backend for the chatting web app, ThisApp.",
+  "keywords": [
+    "ThisApp",
+    "chat",
+    "messages"
+  ],
+  "homepage": "https://github.com/prana-W/ThisApp#readme",
+  "bugs": {
+    "url": "https://github.com/prana-W/ThisApp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prana-W/ThisApp.git"
+  },
+  "license": "ISC",
+  "author": "Pranaw Kumar",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.0",
+    "nodemon": "^3.1.10",
+    "socket.io": "^4.8.1"
+  }
+}
