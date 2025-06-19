@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useState } from 'react';
-const serverUrl = import.meta.env.VITE_SERVER_URL
+const serverUrl = import.meta.env.VITE_SERVER_URL;
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState(null);

@@ -4,12 +4,12 @@ const registerUser = async (req, res) => {
   try {
     const { name, profilePhoto, username, password, about } = req.body;
 
-        await User.create({
-        name,
-        profilePhoto,
-        username,
-        password,
-        about,
+    await User.create({
+      name,
+      profilePhoto,
+      username,
+      password,
+      about,
     });
 
     return res.status(200).json({ message: 'User registered successfully' });
@@ -25,7 +25,6 @@ const loginUser = async (req, res) => {
     const { username, password } = req.body;
 
     const user = await User.findOne({ username });
-
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Internal Server Error' });
