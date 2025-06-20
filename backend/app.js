@@ -1,14 +1,17 @@
-const express = require('express');
-const { createServer } = require('http');
-const { Server } = require('socket.io');
+import express from 'express';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import authRoutes from './routes/auth.route.js';
+import { config } from 'dotenv';
+import cors from 'cors';
+import mongodbConnection from './config/dbConnection.js';
+import cookieParser from 'cookie-parser';
+
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer);
-const authRoutes = require('./routes/auth.route');
-require('dotenv').config();
-const cors = require('cors');
-const mongodbConnect = require('./config/dbConnection');
-const cookieParser = require('cookie-parser');
+config();
+
 const PORT = process.env.PORT || 3000;
 
 // Middlewares
@@ -33,5 +36,5 @@ app.get('/', (req, res) => {
 
 httpServer.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
-  mongodbConnect();
+  mongodbConnection();
 });

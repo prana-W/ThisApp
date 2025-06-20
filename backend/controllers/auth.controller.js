@@ -1,6 +1,8 @@
-const User = require('../models/user.model');
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
+import User from '../models/user.model.js';
+import jwt from 'jsonwebtoken';
+import { config } from 'dotenv';
+
+config();
 
 const registerUser = async (req, res) => {
   try {
@@ -37,7 +39,7 @@ const loginUser = async (req, res) => {
     }
 
     // Adding username to the payload, which can be used to verify user everytime, it visits a route.
-    const token = jwt.sign({ _id: user?._id, username: user.username }, process.env.JWT_SECRET);
+    const token = jwt.sign({ _id: user?._id, username: user?.username }, process.env.JWT_SECRET);
 
     console.log('Logged in user and added token to cookies');
 
@@ -57,12 +59,8 @@ const logoutUser = (req, res) => {
     return res.status(200).clearCookie('token').json({ message: 'User logged out successfully' });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ error: err?.message });
   }
 };
 
-module.exports = {
-  registerUser,
-  loginUser,
-  logoutUser,
-};
+export { registerUser, loginUser, logoutUser };

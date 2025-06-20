@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema(
   {
@@ -61,7 +61,7 @@ userSchema.pre('save', async function (next) {
 // Static method to authenticate user and return a user object (without password)
 userSchema.static('authenticateUser', async function (username, password) {
   try {
-    const user = await this.findOne({ username }).populate('friends', 'chats');
+    const user = await this.findOne({ username });
 
     if (!user) {
       return {
@@ -89,4 +89,5 @@ userSchema.static('authenticateUser', async function (username, password) {
 });
 
 const User = mongoose.model('User', userSchema);
-module.exports = User;
+
+export default User;

@@ -17,7 +17,7 @@
   },
   "license": "ISC",
   "author": "Pranaw Kumar",
-  "type": "commonjs",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
