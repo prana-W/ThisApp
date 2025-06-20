@@ -3,8 +3,8 @@ const { loginUser, registerUser, logoutUser } = require('../controllers/auth.con
 
 const router = express.Router();
 
-router.post('/login', loginUser); // logs the user
-router.post('/register', registerUser); //register a new user
-router.get('/logout', logoutUser); // logs out the user
+router.post('/login', loginUser);
+router.post('/register', registerUser);
+router.get('/logout', logoutUser);
 
 module.exports = router;
