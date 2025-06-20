@@ -1,36 +1,30 @@
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import { RegisterLayout } from '../layouts';
 import { useState } from 'react';
-const serverUrl = import.meta.env.VITE_SERVER_URL;
-const Register = () => {
-  const { register, handleSubmit } = useForm();
-  const [error, setError] = useState(null);
+import axios from 'axios';
+import { toast } from 'sonner';
 
+const serverUrl = import.meta.env.VITE_SERVER_URL;
+
+const Register = () => {
   const onRegister = async (data) => {
     try {
-      const res = await axios.post(`${serverUrl}/auth/register`, data, {
+      const res = await axios.post(`${serverUrl}/auth/registe`, data, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       });
       if (!res) {
-        setError('There was an error registering the user.');
+        toast.error('Server not responding!');
       }
     } catch (err) {
-      setError(err.message);
+      console.log(err);
+      toast.error(`There was an error in registering the user. Error: ${err.message}`);
     }
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onRegister)}>
-        <input type="text" placeholder="Enter your name" {...register('name', { required: true })} />
-        <input type="text" placeholder="Enter a unique username" {...register('username', { required: true })} />
-        <input type="password" placeholder="Enter your password" {...register('password', { required: true })} />
-        <input type="file" {...register('profilePhoto')} />
-        <input type="submit" />
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <RegisterLayout submitLogic={onRegister} />
     </>
   );
 };

@@ -2,8 +2,9 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
-import { BrowserRouter, createBrowserRouter, Outlet, RouterProvider } from 'react-router';
-import Register from './pages/Register.jsx';
+import { Toaster } from '@/components/ui/sonner';
+import { createBrowserRouter, RouterProvider } from 'react-router';
+import { Register, Login } from './pages';
 
 const route = createBrowserRouter([
   {
@@ -14,10 +15,15 @@ const route = createBrowserRouter([
     path: '/register',
     element: <Register />,
   },
+  {
+    path: '/login',
+    element: <Login />,
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={route} />
+    <Toaster />
   </StrictMode>,
 );
