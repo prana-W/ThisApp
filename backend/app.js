@@ -2,6 +2,7 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import authRoutes from './routes/auth.route.js';
+import userRoutes from './routes/user.route.js';
 import { config } from 'dotenv';
 import cors from 'cors';
 import mongodbConnection from './config/dbConnection.js';
@@ -29,6 +30,7 @@ io.on('connection', (socket) => {});
 
 // Routes
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/user', userRoutes);
 
 app.get('/', (req, res) => {
   return res.end('Hey');

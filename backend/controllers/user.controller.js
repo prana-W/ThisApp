@@ -1,10 +1,9 @@
-import User from '../models/user.model';
+import User from '../models/user.model.js';
 
 const getUserFromDB = async (req, res) => {
   try {
-    const searchParameter = req.params['username'] || req.params['_id'];
-
-    const user = await User.findOne({ searchParameter }).populate('friends', 'chat');
+    const username = await req.params['username'];
+    const user = await User.findOne({ username }).populate('friends', 'chat');
 
     if (!user) {
       return res.status(404).json({
@@ -13,7 +12,7 @@ const getUserFromDB = async (req, res) => {
     }
 
     return res.status(200).json({
-      ...user,
+      ...user._doc,
       password: undefined,
     });
   } catch (err) {
@@ -24,4 +23,23 @@ const getUserFromDB = async (req, res) => {
   }
 };
 
-export { getUserFromDB };
+const getAllUsersFromDB = async (req, res) => {
+  try {
+    const users = await User.find({});
+
+    if (!users) {
+      return res.status(404).json({
+        error: 'No users found',
+      });
+    }
+
+    return res.status(200).json(users);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      error: err?.message,
+    });
+  }
+};
+
+export { getUserFromDB, getAllUsersFromDB };

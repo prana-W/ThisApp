@@ -1,7 +1,8 @@
 import express from 'express';
 const router = express.Router();
-import { getUserFromDB } from '../controllers/user.controller.js';
+import { getUserFromDB, getAllUsersFromDB } from '../controllers/user.controller.js';
 
-router.get('/user/:username', (req, res) => {}); //returns the user
+router.get('/', getAllUsersFromDB);
+router.get('/:username', getUserFromDB); //returns the user
 
 export default router;
